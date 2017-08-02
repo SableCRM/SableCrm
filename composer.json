@@ -1,0 +1,16 @@
+{
+  "autoload" : {
+    "psr-4" : {
+      "BounceApi\\" : "BounceApi/",
+      "ZohoHelpers\\" : "CrmHelpers/",
+      "Helpers\\" : "helpers/",
+      "Integration\\" : "Integration/",
+      "public_html\\" : "public_html/",
+      "ZohoBooks\\" : "Zoho/ZohoBooks/",
+      "ZohoAuth\\" : "Zoho/ZohoAuth/",
+      "ZohoRequest\\" : "Zoho/ZohoRequest/",
+      "WSI\\" : "."
+    },
+    "files":["wsdl2php_generated/vendor/autoload.php"]
+  }
+}
