@@ -2,16 +2,16 @@
 
 	namespace WSI\Account;
 
+	use WSI\Account\interfaces\IFormat;
+
 	abstract class AbstractEntity
 	{
 		public function __set($name, $value)
 		{
 			if(!property_exists($this, $name))
 			{
-				throw new \InvalidArgumentException("The property $name does not exist in this class.");
+				return;
 			}
-
-			$this->$name = $value;
 		}
 
 		protected function outputCollectionOfObjects($collectionOfEntities)
@@ -38,5 +38,29 @@
 			return $collectionOfEntitiesObject;
 		}
 
-		public abstract function create($entity);
+		public function create($entities)
+		{
+			$collectionOfEntities = [];
+
+			$entities = $this->outputCollectionOfObjects($entities);
+
+			foreach($entities as $entity)
+			{
+				$entityObj = new $this;
+
+				foreach($entity as $entityKey => $entityValue)
+				{
+					$entityObj->$entityKey = $entityValue;
+				}
+
+				$collectionOfEntities[] = $entityObj;
+			}
+
+			return $collectionOfEntities;
+		}
+
+		public function format(IFormat $format)
+		{
+//			$format->format();
+		}
 	}

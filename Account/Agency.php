@@ -16,11 +16,9 @@
 			}
 		}
 
-		public function setAgencyTypeId($agencyTypeId)
+		protected function setAgencyTypeId($agencyTypeId)
 		{
 			$this->agencyTypeId = $agencyTypeId;
-
-			return $this;
 		}
 
 		public function getPhone1()
@@ -31,11 +29,9 @@
 			}
 		}
 
-		public function setPhone1($phone1)
+		protected function setPhone1($phone1)
 		{
 			$this->phone1 = $phone1;
-
-			return $this;
 		}
 
 		public function getAgencyNo()
@@ -46,20 +42,8 @@
 			}
 		}
 
-		public function setAgencyNo($agencyNo)
+		protected function setAgencyNo($agencyNo)
 		{
 			$this->agencyNo = $agencyNo;
-
-			return $this;
-		}
-
-		public function create($entity)
-		{
-			$agency = new self();
-			$agency->setAgencyTypeId($entity->agencyTypeId);
-			$agency->setPhone1($entity->phone1);
-			$agency->setAgencyNo($entity->agencyNo);
-
-			return $agency;
 		}
 	}

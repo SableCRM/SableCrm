@@ -10,9 +10,9 @@
 	{
 		protected $contacts;
 
-		public function format(IFormattable $collectionOfContacts)
+		public function format($collectionOfContacts)
 		{
-			$this->formatContacts($collectionOfContacts->getAll());
+			$this->formatContacts($collectionOfContacts);
 
 			return '<Contacts>'.$this->contacts.'</Contacts>';
 		}

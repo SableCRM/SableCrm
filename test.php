@@ -1,85 +1,111 @@
 <?php
 
 	use WSI\Account\Agency;
+	use WSI\Account\Contact;
 	use WSI\Account\formats\AgenciesAsXml;
+	use WSI\Account\formats\ZonesAsXml;
 	use WSI\Account\WSICollections;
+	use WSI\Account\Zone;
 
 	require_once "bootstrap.php";
 
 	echo "<pre>";
 
-//	$zonesAsJson = '[{"zoneId":1,"zoneName":"front door","eventType":1140,"equipmentType":"wsr"},{"zoneId":1,"zoneName":"front door","eventType":1140,"equipmentType":"wsr"},{"zoneId":1,"zoneName":"front door","eventType":1140,"equipmentType":"wsr"}]';
-//
-//	$zonesAsArray = [
-//		[
-//			"zoneId" => 1,
-//			"zoneName" => "Front door",
-//			"eventType" => 1140,
-//			"equipmentType" => "wsr"
-//		],
-//		[
-//			"zoneId" => 2,
-//			"zoneName" => "Side door",
-//			"eventType" => 1005,
-//			"equipmentType" => "leg"
-//		],
-//		[
-//			"zoneId" => 3,
-//			"zoneName" => "Kitchen door",
-//			"eventType" => 1633,
-//			"equipmentType" => "wsr",
-//		],
-//		[
-//			"zoneId" => 4,
-//			"zoneName" => "Pantry door",
-//			"eventType" => 2585,
-//			"equipmentType" => "bwg",
-//		],
-//		[
-//			"zoneId" => 5,
-//			"zoneName" => "front door",
-//			"eventType" => 1352,
-//			"equipmentType" => "dsr",
-//		],
-//		[
-//			"zoneId" => 6,
-//			"zoneName" => "front door",
-//			"eventType" => 9985,
-//			"equipmentType" => "wsr",
-//		],
-//		[
-//			"zoneId" => 7,
-//			"zoneName" => "front door",
-//			"eventType" => 4525,
-//			"equipmentType" => "wsr",
-//		],
-//		[
-//			"zoneId" => 8,
-//			"zoneName" => "front door",
-//			"eventType" => 4785,
-//			"equipmentType" => "wsr",
-//		],
-//	];
-//
-//	$agenciesAsArray = [
-//		[
-//			"agencyTypeId" => 1,
-//			"phone1" => 2,
-//			"agencyNo" => 55,
-//		]
-//	];
-//
-//	$wsiCollection = new WSICollections($agenciesAsArray, new Agency() , new AgenciesAsXml());
-//
-//	print_r($wsiCollection->getAll());
+	$arrayZones = [
+		[
+			"zoneId" => 1,
+			"zoneName" => "Front door",
+			"zoneStateId" => "good",
+			"eventId" => 1140,
+			"equipLocId" => "basement",
+			"equipTypeId" => "wsr",
+		],
+		[
+			"zoneId" => 2,
+			"zoneName" => "Side door",
+			"eventType" => 1005,
+			"equipmentType" => "leg",
+		],
+		[
+			"zoneId" => 3,
+			"zoneName" => "Kitchen door",
+			"eventType" => 1633,
+			"equipmentType" => "wsr",
+		],
+	];
 
-	$arrayOfContacts = [
+	$jsonZones = '[{"zoneId":1,"zoneName":"front door","eventType":1140,"equipmentType":"wsr"},{"zoneId":1,"zoneName":"front door","eventType":1140,"equipmentType":"wsr"},{"zoneId":1,"zoneName":"front door","eventType":1140,"equipmentType":"wsr"}]';
+
+	$arrayContacts = [
 		[
 			"firstName" => "Ainsley",
 			"lastName" => "Clarke",
-		]
+			"contactTypeId" => "Special",
+			"relationId" => "Owner",
+			"authId" => "police",
+			"hasKeyFlag" => "Y",
+			"phone1" => 2019885510,
+			"phoneTypeId1" => "Cell",
+			"contractSignerFlag" => "Y",
+			"contlTypeNo" => 5001
+		],
+		[
+			"firstName" => "Ainsley",
+			"lastName" => "Clarke",
+			"contactTypeId" => "Special",
+			"relationId" => "Owner",
+			"authId" => "police",
+			"contractSignerFlag" => "N",
+			"hasKeyFlag" => "Y",
+			"phone1" => 2019885510,
+			"phoneTypeId1" => "Cell",
+			"contlTypeNo" => 5000
+		],
+		[
+			"firstName" => "Ainsley",
+			"lastName" => "Clarke",
+			"contactTypeId" => "Special",
+			"contractSignerFlag" => "B",
+			"relationId" => "Owner",
+			"authId" => "police",
+			"hasKeyFlag" => "Y",
+			"phone1" => 2019885510,
+			"phoneTypeId1" => "Cell",
+			"contlTypeNo" => 5020
+		],
 	];
 
-	$contacts = new \WSI\Account\Contact();
+	$jsonContacts = '[{"firstName":"Ainsley","lastName":"Clarke","contactTypeId":"Special","relationId":"Owner","authId":"police","hasKeyFlag":"Y","phone1":2019885510,"phoneTypeId1":"Cell","contractSignerFlag":"Y","contlTypeNo":5001},{"firstName":"Ainsley","lastName":"Clarke","contactTypeId":"Special","relationId":"Owner","authId":"police","contractSignerFlag":"N","hasKeyFlag":"Y","phone1":2019885510,"phoneTypeId1":"Cell","contlTypeNo":5000},{"firstName":"Ainsley","lastName":"Clarke","contactTypeId":"Special","contractSignerFlag":"B","relationId":"Owner","authId":"police","hasKeyFlag":"Y","phone1":2019885510,"phoneTypeId1":"Cell","contlTypeNo":5020}]';
 
-	print_r($contacts->create($arrayOfContacts));
+	$arrayAgencies = [
+		[
+			"agencyTypeId" => "test",
+			"phone1" => 2015526233,
+			"agencyNo" => 2580,
+		],
+		[
+			"agencyTypeId" => "test",
+			"phone1" => 2015526233,
+			"agencyNo" => 2580,
+		],
+		[
+			"agencyTypeId" => "test",
+			"phone1" => 2015526233,
+			"agencyNo" => 2580,
+		],
+	];
+
+	$jsonAgencies = '[{"agencyTypeId":"test","phone1":2015526233,"agencyNo":2580},{"agencyTypeId":"test","phone1":2015526233,"agencyNo":2580},{"agencyTypeId":"test","phone1":2015526233,"agencyNo":2580}]';
+
+	$contacts = new Contact();
+	$agencies = new Agency();
+	$zones    = new Zone();
+	$wsiCollection = new WSICollections(new ZonesAsXml());
+
+	print_r($contacts->create($jsonContacts));
+
+	print_r($agencies->create($arrayAgencies));
+
+	print_r($zones->create($jsonZones));
+
+	print_r($wsiCollection->getAll());

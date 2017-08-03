@@ -26,8 +26,6 @@
 		protected function setFirstName($firstName)
 		{
 			$this->firstName = $firstName;
-
-			return $this;
 		}
 
 		public function getLastName()
@@ -41,8 +39,6 @@
 		protected function setLastName($lastName)
 		{
 			$this->lastName = $lastName;
-
-			return $this;
 		}
 
 		public function getContactTypeId()
@@ -56,8 +52,6 @@
 		protected function setContactTypeId($contactTypeId)
 		{
 			$this->contactTypeId = $contactTypeId;
-
-			return $this;
 		}
 
 		public function getRelationId()
@@ -71,8 +65,6 @@
 		protected function setRelationId($relationId)
 		{
 			$this->relationId = $relationId;
-
-			return $this;
 		}
 
 		public function getAuthId()
@@ -86,8 +78,6 @@
 		protected function setAuthId($authId)
 		{
 			$this->authId = $authId;
-
-			return $this;
 		}
 
 		public function getContractSignerFlag()
@@ -101,8 +91,6 @@
 		protected function setContractSignerFlag($contractSignerFlag)
 		{
 			$this->contractSignerFlag = $contractSignerFlag;
-
-			return $this;
 		}
 
 		public function getHasKeyFlag()
@@ -116,8 +104,6 @@
 		protected function setHasKeyFlag($hasKeyFlag)
 		{
 			$this->hasKeyFlag = $hasKeyFlag;
-
-			return $this;
 		}
 
 		public function getPhone1()
@@ -131,8 +117,6 @@
 		protected function setPhone1($phone1)
 		{
 			$this->phone1 = $phone1;
-
-			return $this;
 		}
 
 		public function getPhoneTypeId1()
@@ -146,8 +130,6 @@
 		protected function setPhoneTypeId1($phoneTypeId1)
 		{
 			$this->phoneTypeId1 = $phoneTypeId1;
-
-			return $this;
 		}
 
 		public function getContlTypeNo()
@@ -161,25 +143,5 @@
 		protected function setContlTypeNo($contlTypeNo)
 		{
 			$this->contlTypeNo = $contlTypeNo;
-
-			return $this;
-		}
-
-		public function create($contacts)
-		{
-			$collectionOfContacts = [];
-
-			$contacts = $this->outputCollectionOfObjects($contacts);
-
-			foreach($contacts as $contactKey => $contactValue)
-			{
-				$contact = new self();
-
-				$contact->$contactKey = $contactValue;
-
-				$collectionOfContacts[] = $contact;
-			}
-
-			return $collectionOfContacts;
 		}
 	}

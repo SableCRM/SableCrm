@@ -12,39 +12,9 @@
 		protected $entity;
 		protected $format;
 
-		public function __construct($collectionOfEntities, AbstractEntity $entity, IFormat $format)
+		public function __construct(IFormat $format)
 		{
-			$this->entity = $entity;
 			$this->format = $format;
-
-			foreach($this->outputCollectionOfObjects($collectionOfEntities) as $entity)
-			{
-				$this->add($this->entity->create($entity));
-			}
-		}
-
-		protected function outputCollectionOfObjects($collectionOfEntities)
-		{
-			$entities = $collectionOfEntities;
-
-			if(is_array($collectionOfEntities))
-			{
-				$entities = json_encode($collectionOfEntities);
-			}
-
-			return $this->entitiesToObjects($entities);
-		}
-
-		protected function entitiesToObjects($entities)
-		{
-			$collectionOfEntitiesObject = null;
-
-			if(!$collectionOfEntitiesObject = json_decode($entities))
-			{
-				throw new \Exception("Unable to parse the supplied collection of entities.");
-			}
-
-			return $collectionOfEntitiesObject;
 		}
 
 		public function add(AbstractEntity $entity)

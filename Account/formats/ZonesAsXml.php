@@ -4,15 +4,14 @@
 
 	use WSI\Account\Zone;
 	use WSI\Account\interfaces\IFormat;
-	use WSI\Account\interfaces\IFormattable;
 
 	class ZonesAsXml implements IFormat
 	{
 		private $zones;
 
-		public function format(IFormattable $collectionOfZones)
+		public function format($collectionOfZones)
 		{
-			$this->formatZones($collectionOfZones->getAll());
+			$this->formatZones($collectionOfZones);
 
 			return '<Zones>'.$this->zones.'</Zones>';
 		}
