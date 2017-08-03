@@ -2,7 +2,16 @@
 
 	require_once "../bootstrap.php";
 
+	$zonesCollection = new \WSI\Account\WSICollections();
+
 	header("Content-Type: text/json");
+
+	$zonesCollection->add(new \WSI\Account\Zone("10", "front door"));
+	$zonesCollection->add(new \WSI\Account\Zone("22", "basement window"));
+
+	print_r($zonesCollection->getCollection());
+
+	exit;
 
 	$collection = new \WSI\Account\WSICollections();
 
@@ -22,7 +31,8 @@
 
 	print_r($collection->getCollection());
 
-exit;
+	exit;
+
 	$zoneArray = [
 		[
 			"zoneNumber" => 1,

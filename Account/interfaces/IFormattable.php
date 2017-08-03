@@ -4,5 +4,5 @@
 
 	interface IFormattable
 	{
-		public function getCollection();
+		public function getAll();
 	}

@@ -2,6 +2,8 @@
 
 	namespace WSI\Account;
 
+	use WSI\Account\interfaces\IZoneFormat;
+
 	class Zone extends AbstractEntity
 	{
 		protected $zoneId;
@@ -11,7 +13,7 @@
 		protected $equipLocId;
 		protected $equipTypeId;
 
-		public function __construct($zoneId, $name)
+		public function __construct($zoneId, $name, $eventId, $equipTypeId)
 		{
 			$this->setZoneId($zoneId);
 			$this->setName($name);
@@ -107,13 +109,25 @@
 			return $this;
 		}
 
-		protected function create($zone)
+		protected function create($zones)
 		{
+			$collection = new WSICollections();
+
+			foreach($zones as $zone)
+			{
+				$collection->add($this);
+			}
+
 			$this->add((new Zone($zone["zoneNumber"], $zone["zoneName"]))
 				->setEventId($zone["eventType"])
 				->setEquipTypeId($zone["deviceType"])
 				->setEquipLocId("OTHR")
 				->setZoneStateId("A")
 			);
+		}
+
+		public function getZones(IZoneFormat $format)
+		{
+			return $format->getZones($this);
 		}
 	}

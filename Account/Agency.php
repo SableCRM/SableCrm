@@ -53,8 +53,13 @@
 			return $this;
 		}
 
-		protected function create($entity)
+		public function create($entity)
 		{
-			// TODO: Implement create() method.
+			$agency = new self();
+			$agency->setAgencyTypeId($entity->agencyTypeId);
+			$agency->setPhone1($entity->phone1);
+			$agency->setAgencyNo($entity->agencyNo);
+
+			return $agency;
 		}
 	}

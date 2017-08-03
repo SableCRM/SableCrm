@@ -2,25 +2,50 @@
 
 	namespace WSI\Account;
 
-	class WSICollections
+	use WSI\Account\interfaces\IFormat;
+	use WSI\Account\interfaces\IFormattable;
+	use WSI\Account\interfaces\IWSICollection;
+
+	class WSICollections implements IWSICollection, IFormattable
 	{
 		protected $collectionOfEntities = [];
+		protected $entity;
+		protected $format;
 
-//		public function __construct($zones)
-//		{
-//			if(count($zones) > 0)
-//			{
-//				foreach($zones as $zone)
-//				{
-//					if(!is_array($zone))
-//					{
-//						$zone = json_decode($zone);
-//					}
-//
-//					$this->createZone($zone);
-//				}
-//			}
-//		}
+		public function __construct($collectionOfEntities, AbstractEntity $entity, IFormat $format)
+		{
+			$this->entity = $entity;
+			$this->format = $format;
+
+			foreach($this->outputCollectionOfObjects($collectionOfEntities) as $entity)
+			{
+				$this->add($this->entity->create($entity));
+			}
+		}
+
+		protected function outputCollectionOfObjects($collectionOfEntities)
+		{
+			$entities = $collectionOfEntities;
+
+			if(is_array($collectionOfEntities))
+			{
+				$entities = json_encode($collectionOfEntities);
+			}
+
+			return $this->entitiesToObjects($entities);
+		}
+
+		protected function entitiesToObjects($entities)
+		{
+			$collectionOfEntitiesObject = null;
+
+			if(!$collectionOfEntitiesObject = json_decode($entities))
+			{
+				throw new \Exception("Unable to parse the supplied collection of entities.");
+			}
+
+			return $collectionOfEntitiesObject;
+		}
 
 		public function add(AbstractEntity $entity)
 		{
@@ -52,8 +77,8 @@
 			return $this->collectionOfEntities[$indexOfEntityToUpdate];
 		}
 
-		public function getCollection()
+		public function getAll()
 		{
-			return $this->collectionOfEntities;
+			return $this->format->format($this->collectionOfEntities);
 		}
 	}

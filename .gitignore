@@ -7,3 +7,4 @@ vendor
 wsdl2php_generated
 Zoho
 .idea
+composer.phar

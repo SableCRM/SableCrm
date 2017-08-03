@@ -15,12 +15,6 @@
 		protected $phoneTypeId1;
 		protected $contlTypeNo;
 
-		public function __construct($firstName, $lastName)
-		{
-			$this->setFirstName($firstName);
-			$this->setLastName($lastName);
-		}
-
 		public function getFirstName()
 		{
 			if($this->firstName)
@@ -29,7 +23,7 @@
 			}
 		}
 
-		public function setFirstName($firstName)
+		protected function setFirstName($firstName)
 		{
 			$this->firstName = $firstName;
 
@@ -44,7 +38,7 @@
 			}
 		}
 
-		public function setLastName($lastName)
+		protected function setLastName($lastName)
 		{
 			$this->lastName = $lastName;
 
@@ -59,7 +53,7 @@
 			}
 		}
 
-		public function setContactTypeId($contactTypeId)
+		protected function setContactTypeId($contactTypeId)
 		{
 			$this->contactTypeId = $contactTypeId;
 
@@ -74,7 +68,7 @@
 			}
 		}
 
-		public function setRelationId($relationId)
+		protected function setRelationId($relationId)
 		{
 			$this->relationId = $relationId;
 
@@ -89,7 +83,7 @@
 			}
 		}
 
-		public function setAuthId($authId)
+		protected function setAuthId($authId)
 		{
 			$this->authId = $authId;
 
@@ -104,7 +98,7 @@
 			}
 		}
 
-		public function setContractSignerFlag($contractSignerFlag)
+		protected function setContractSignerFlag($contractSignerFlag)
 		{
 			$this->contractSignerFlag = $contractSignerFlag;
 
@@ -119,7 +113,7 @@
 			}
 		}
 
-		public function setHasKeyFlag($hasKeyFlag)
+		protected function setHasKeyFlag($hasKeyFlag)
 		{
 			$this->hasKeyFlag = $hasKeyFlag;
 
@@ -134,7 +128,7 @@
 			}
 		}
 
-		public function setPhone1($phone1)
+		protected function setPhone1($phone1)
 		{
 			$this->phone1 = $phone1;
 
@@ -149,7 +143,7 @@
 			}
 		}
 
-		public function setPhoneTypeId1($phoneTypeId1)
+		protected function setPhoneTypeId1($phoneTypeId1)
 		{
 			$this->phoneTypeId1 = $phoneTypeId1;
 
@@ -164,15 +158,28 @@
 			}
 		}
 
-		public function setContlTypeNo($contlTypeNo)
+		protected function setContlTypeNo($contlTypeNo)
 		{
 			$this->contlTypeNo = $contlTypeNo;
 
 			return $this;
 		}
 
-		protected function create($entity)
+		public function create($contacts)
 		{
-			// TODO: Implement create() method.
+			$collectionOfContacts = [];
+
+			$contacts = $this->outputCollectionOfObjects($contacts);
+
+			foreach($contacts as $contactKey => $contactValue)
+			{
+				$contact = new self();
+
+				$contact->$contactKey = $contactValue;
+
+				$collectionOfContacts[] = $contact;
+			}
+
+			return $collectionOfContacts;
 		}
 	}

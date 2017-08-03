@@ -3,16 +3,16 @@
 	namespace WSI\Account\formats;
 
 	use WSI\Account\Zone;
+	use WSI\Account\interfaces\IFormat;
 	use WSI\Account\interfaces\IFormattable;
-	use WSI\Account\interfaces\IZoneFormat;
 
-	class ZonesAsXml implements IZoneFormat
+	class ZonesAsXml implements IFormat
 	{
 		private $zones;
 
-		public function getZones(IFormattable $zones)
+		public function format(IFormattable $collectionOfZones)
 		{
-			$this->formatZones($zones->getCollection());
+			$this->formatZones($collectionOfZones->getAll());
 
 			return '<Zones>'.$this->zones.'</Zones>';
 		}
@@ -21,13 +21,13 @@
 		{
 			foreach($zones as $zone)
 			{
-				$zone = $this->returnZone($zone);
+				$zone = $this->castToTypeofZone($zone);
 
 				$this->zones .= '<Zone zone_id="'.$zone->getZoneId().'" zonestate_id="'.$zone->getZoneStateId().'" event_id="'.$zone->getEventId().'" equiploc_id="'.$zone->getEquipLocId().'" equiptype_id="'.$zone->getEquipTypeId().'" zone_comment="'.$zone->getName().'" />';
 			}
 		}
 
-		private function returnZone(Zone $zone)
+		private function castToTypeofZone(Zone $zone)
 		{
 			return $zone;
 		}
