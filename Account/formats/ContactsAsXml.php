@@ -2,12 +2,8 @@
 
 	namespace WSI\Account\formats;
 
-	use WSI\Account\Contact;
-
 	class ContactsAsXml extends AbstractFormats
 	{
-		protected $value;
-
 		protected $entityParams = [
 			"first_name" => "getFirstName",
 			"last_name" => "getLastName",
@@ -25,21 +21,9 @@
 		{
 			foreach($collectionOfContacts as $contact)
 			{
-				$contact = $this->castToTypeofContact($contact);
-
-				foreach($this->entityParams as $entityParamKey => $entityParamValue)
-				{
-					$this->value .= ($val = $contact->{$entityParamValue}()) ? $entityParamKey.'="'.$val.'" ' : false;
-				}
-
-				 $this->formattedEntity .= "<Contact {$this->value}/>";
+				$this->formattedEntity .= "<Contact {$this->autoFillAttributes($contact)}/>";
 			}
 
 			return '<Contacts>'.$this->formattedEntity.'</Contacts>';
-		}
-
-		private function castToTypeofContact(Contact $contact)
-		{
-			return $contact;
 		}
 	}
