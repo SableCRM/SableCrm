@@ -6,13 +6,36 @@
 
 	class ContactsAsXml extends AbstractFormats
 	{
+		protected $value;
+
+		protected $entityParams = [
+			"first_name" => "getFirstName",
+			"last_name" => "getLastName",
+			"ctactype_id" => "getContactTypeId",
+			"relation_id" => "getRelationId",
+			"auth_id" => "getAuthId",
+			"contract_signer_flag" => "getContractSignerFlag",
+			"has_key_flag" => "getHasKeyFlag",
+			"phone1" => "getPhone1",
+			"phonetype_id1" => "getPhoneTypeId1",
+			"contltype_no" => "getContlTypeNo",
+		];
+
 		public function formatEntity($collectionOfContacts)
 		{
 			foreach($collectionOfContacts as $contact)
 			{
 				$contact = $this->castToTypeofContact($contact);
 
-				 $this->formattedEntity .= '<Contact last_name="'.$contact->getLastName().'" first_name="'.$contact->getFirstName().'" ctactype_id="'.$contact->getContactTypeId().'" relation_id="'.$contact->getRelationId().'" auth_id="'.$contact->getAuthId().'" contract_signer_flag="'.$contact->getContractSignerFlag().'" has_key_flag="'.$contact->getHasKeyFlag().'" phone1="'.$contact->getPhone1().'" phonetype_id1="'.$contact->getPhoneTypeId1().'" contltype_no="'.$contact->getContlTypeNo().'" />';
+				foreach($this->entityParams as $entityParamKey => $entityParamValue)
+				{
+					if($contact::entityParamValue)
+					{
+						$this->value .= $entityParamKey.'"'.$entityParamValue.'" ';
+					}
+				}
+
+				 $this->formattedEntity .= "<Contact $this->value/>";
 			}
 
 			return '<Contacts>'.$this->formattedEntity.'</Contacts>';

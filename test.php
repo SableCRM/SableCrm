@@ -5,7 +5,7 @@
 	use WSI\Account\WSICollections;
 	use WSI\Account\Zone;
 
-	header("Content-Type: text/xml");
+//	header("Content-Type: text/xml");
 
 	require_once "bootstrap.php";
 
@@ -109,8 +109,8 @@
 //	$agencies = new Agency();
 //	$zones    = new Zone();
 
-	$wsiCollection = new WSICollections(new \WSI\Account\formats\ZonesAsXml((new Zone())->create
-	($arrayZones)));
+	$wsiCollection = new WSICollections(new \WSI\Account\formats\ContactsAsXml((new Contact())->create
+	($arrayContacts)));
 //
 //	print_r($contacts->create($jsonContacts));
 //
