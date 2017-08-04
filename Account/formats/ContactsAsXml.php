@@ -29,13 +29,10 @@
 
 				foreach($this->entityParams as $entityParamKey => $entityParamValue)
 				{
-					if($contact::entityParamValue)
-					{
-						$this->value .= $entityParamKey.'"'.$entityParamValue.'" ';
-					}
+					$this->value .= ($val = $contact->{$entityParamValue}()) ? $entityParamKey.'="'.$val.'" ' : false;
 				}
 
-				 $this->formattedEntity .= "<Contact $this->value/>";
+				 $this->formattedEntity .= "<Contact {$this->value}/>";
 			}
 
 			return '<Contacts>'.$this->formattedEntity.'</Contacts>';

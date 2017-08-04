@@ -48,38 +48,38 @@
 		[
 			"firstName" => "Ainsley",
 			"lastName" => "Clarke",
-			"contactTypeId" => "Special",
-			"relationId" => "Owner",
-			"authId" => "police",
-			"hasKeyFlag" => "Y",
-			"phone1" => 2019885510,
-			"phoneTypeId1" => "Cell",
-			"contractSignerFlag" => "Y",
-			"contlTypeNo" => 5001
+//			"contactTypeId" => "Special",
+//			"relationId" => "Owner",
+//			"authId" => "police",
+//			"hasKeyFlag" => "Y",
+//			"phone1" => 2019885510,
+//			"phoneTypeId1" => "Cell",
+//			"contractSignerFlag" => "Y",
+//			"contlTypeNo" => 5001
 		],
 		[
 			"firstName" => "Ainsley",
 			"lastName" => "Clarke",
-			"contactTypeId" => "Special",
-			"relationId" => "Owner",
-			"authId" => "police",
-			"contractSignerFlag" => "N",
-			"hasKeyFlag" => "Y",
+//			"contactTypeId" => "Special",
+//			"relationId" => "Owner",
+//			"authId" => "police",
+//			"contractSignerFlag" => "N",
+//			"hasKeyFlag" => "Y",
 			"phone1" => 2019885510,
 			"phoneTypeId1" => "Cell",
 			"contlTypeNo" => 5000
 		],
 		[
-			"firstName" => "Ainsley",
+//			"firstName" => "Ainsley",
 			"lastName" => "Clarke",
 			"contactTypeId" => "Special",
-			"contractSignerFlag" => "B",
-			"relationId" => "Owner",
+//			"contractSignerFlag" => "B",
+//			"relationId" => "Owner",
 			"authId" => "police",
 			"hasKeyFlag" => "Y",
 			"phone1" => 2019885510,
-			"phoneTypeId1" => "Cell",
-			"contlTypeNo" => 5020
+//			"phoneTypeId1" => "Cell",
+//			"contlTypeNo" => 5020
 		],
 	];
 
