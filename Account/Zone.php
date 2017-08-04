@@ -6,16 +6,16 @@
 	{
 		protected $zoneId;
 		protected $zoneName;
-		protected $zoneStateId;
+		protected $zoneStateId = "A";
 		protected $eventId;
-		protected $equipLocId;
+		protected $equipLocId = "OTHR";
 		protected $equipTypeId;
 
 		public function getName()
 		{
-			if($this->name)
+			if($this->zoneName)
 			{
-				return $this->name;
+				return $this->zoneName;
 			}
 		}
 

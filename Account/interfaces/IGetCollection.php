@@ -2,7 +2,7 @@
 
 	namespace WSI\Account\interfaces;
 
-	interface IFormattable
+	interface IGetCollection
 	{
 		public function getAll();
 	}

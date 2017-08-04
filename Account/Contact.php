@@ -9,8 +9,8 @@
 		protected $contactTypeId;
 		protected $relationId;
 		protected $authId;
-		protected $contractSignerFlag;
-		protected $hasKeyFlag;
+		protected $contractSignerFlag = "N";
+		protected $hasKeyFlag = "N";
 		protected $phone1;
 		protected $phoneTypeId1;
 		protected $contlTypeNo;

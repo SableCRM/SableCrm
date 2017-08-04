@@ -4,5 +4,5 @@
 
 	interface IFormat
 	{
-		public function format($entity);
+		public function format();
 	}

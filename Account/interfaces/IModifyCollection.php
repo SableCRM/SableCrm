@@ -4,7 +4,7 @@
 
 	use WSI\Account\AbstractEntity;
 
-	interface IWSICollection
+	interface IModifyCollection
 	{
 		public function add(AbstractEntity $entity);
 		public function remove(AbstractEntity $entity);

@@ -4,9 +4,9 @@
 
 	class Agency extends AbstractEntity
 	{
-		protected $agencyTypeId;
 		protected $phone1;
 		protected $agencyNo;
+		protected $agencyTypeId;
 
 		public function getAgencyTypeId()
 		{

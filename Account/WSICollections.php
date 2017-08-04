@@ -3,14 +3,14 @@
 	namespace WSI\Account;
 
 	use WSI\Account\interfaces\IFormat;
-	use WSI\Account\interfaces\IFormattable;
-	use WSI\Account\interfaces\IWSICollection;
+	use WSI\Account\interfaces\IGetCollection;
+	use WSI\Account\interfaces\IModifyCollection;
 
-	class WSICollections implements IWSICollection, IFormattable
+	class WSICollections implements IModifyCollection, IGetCollection
 	{
-		protected $collectionOfEntities = [];
 		protected $entity;
 		protected $format;
+		protected $collectionOfEntities = [];
 
 		public function __construct(IFormat $format)
 		{
@@ -49,6 +49,6 @@
 
 		public function getAll()
 		{
-			return $this->format->format($this->collectionOfEntities);
+			return $this->format->format();
 		}
 	}

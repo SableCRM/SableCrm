@@ -61,6 +61,6 @@
 
 		public function format(IFormat $format)
 		{
-//			$format->format();
+			$format->format();
 		}
 	}
