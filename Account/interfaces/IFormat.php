@@ -4,5 +4,5 @@
 
 	interface IFormat
 	{
-		public function format();
+		public function format(array $data);
 	}
