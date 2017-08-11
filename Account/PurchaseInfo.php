@@ -2,10 +2,9 @@
 
 	namespace WSI\Account;
 
-	use WSI\Account\interfaces\IFormat;
-	use WSI\Account\interfaces\IFormattable;
+	use stdClass;
 
-	class PurchaseInfo implements IFormattable
+	class PurchaseInfo extends AbstractEntity
 	{
 		protected $CS;
 		protected $RMR;
@@ -13,21 +12,6 @@
 		protected $UserId;
 		protected $LastUpdated;
 		protected $Source;
-
-		public function __construct($data = null)
-		{
-			if(!$data) return;
-
-			foreach($data as $key => $val)
-			{
-				$functionName = "set".$key;
-
-				if(method_exists($this,$functionName))
-				{
-					$this->{$functionName}($val);
-				}
-			}
-		}
 
 		public function setCS($cs)
 		{
@@ -59,17 +43,17 @@
 			$this->Source = $source;
 		}
 
-		public function getFormat(IFormat $purchaseInfo)
+		protected function getEntityObj()
 		{
-			return $purchaseInfo->format(
-				[
-					"CS" => $this->CS,
-					"RMR" => $this->RMR,
-					"DealerId" => $this->DealerId,
-					"UserId" => $this->UserId,
-					"LastUpdated" => $this->LastUpdated,
-					"Source" => $this->Source,
-				]
-			);
+			$entityObj = new stdClass();
+
+			$entityObj->CS = $this->CS;
+			$entityObj->RMR = $this->RMR;
+			$entityObj->DealerId = $this->DealerId;
+			$entityObj->UserId = $this->UserId;
+			$entityObj->LastUpdated = $this->LastUpdated;
+			$entityObj->Source = $this->Source;
+
+			return $entityObj;
 		}
 	}

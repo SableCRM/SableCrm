@@ -2,10 +2,9 @@
 
 	namespace WSI\Account;
 
-	use WSI\Account\interfaces\IFormat;
-	use WSI\Account\interfaces\IFormattable;
+	use stdClass;
 
-	class CreditRequest implements IFormattable
+	class CreditRequest extends AbstractEntity
 	{
 		protected $CS;
 		protected $SSN;
@@ -23,21 +22,6 @@
 		protected $TransactionID;
 		protected $Token;
 		protected $BureauID;
-
-		public function __construct($data = null)
-		{
-			if(!$data) return;
-
-			foreach($this->data = $data as $key => $val)
-			{
-				$functionName = "set".$key;
-
-				if(method_exists($this,$functionName))
-				{
-					$this->{$functionName}($val);
-				}
-			}
-		}
 
 		public function setCS($CS)
 		{
@@ -119,27 +103,27 @@
 			$this->BureauID = $BureauID;
 		}
 
-		public function getFormat(IFormat $creditRequest)
+		protected function getEntityObj()
 		{
-			return $creditRequest->format(
-				[
-					"CS" => $this->CS,
-					"SSN" => $this->SSN,
-					"FirstName" => $this->FirstName,
-					"LastName" => $this->LastName,
-					"StreetNumber" => $this->StreetNumber,
-					"StreetName" => $this->StreetName,
-					"City" => $this->City,
-					"State" => $this->State,
-					"Zip" => $this->Zip,
-					"DealerId" => $this->DealerId,
-					"UserId" => $this->UserId,
-					"Fico" => $this->FICO,
-					"RequestDate" => $this->RequestDate,
-					"TransactionID" => $this->TransactionID,
-					"Token" => $this->Token,
-					"BureauID" => $this->BureauID,
-				]
-			);
+			$entityObj = new stdClass();
+
+			$entityObj->CS = $this->CS;
+			$entityObj->SSN = $this->SSN;
+			$entityObj->FirstName = $this->FirstName;
+			$entityObj->LastName = $this->LastName;
+			$entityObj->StreetNumber = $this->StreetNumber;
+			$entityObj->StreetName = $this->StreetName;
+			$entityObj->City = $this->City;
+			$entityObj->State = $this->State;
+			$entityObj->Zip = $this->Zip;
+			$entityObj->DealerId = $this->DealerId;
+			$entityObj->UserId = $this->UserId;
+			$entityObj->FICO = $this->FICO;
+			$entityObj->RequestDate = $this->RequestDate;
+			$entityObj->TransactionID = $this->TransactionID;
+			$entityObj->Token = $this->Token;
+			$entityObj->BureauID = $this->BureauID;
+
+			return $entityObj;
 		}
 	}

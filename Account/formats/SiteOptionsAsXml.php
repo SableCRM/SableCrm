@@ -12,7 +12,7 @@
 
 			foreach($data as $key => $val)
 			{
-				$values .= "<SiteOption option_id=\"$key\" option_value=\"$val\" />";
+				$values .= "<SiteOption option_id=\"".strtoupper($key)."\" option_value=\"".strtoupper($val)."\" />";
 			}
 
 			return '<SiteOptions>'.$values.'</SiteOptions>';

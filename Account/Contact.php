@@ -2,6 +2,8 @@
 
 	namespace WSI\Account;
 
+	use stdClass;
+
 	class Contact extends AbstractEntity
 	{
 		protected $firstName;
@@ -15,58 +17,71 @@
 		protected $phoneTypeId1;
 		protected $contlTypeNo;
 
-		protected function setFirstName($firstName)
+		public function setFirstName($firstName)
 		{
 			$this->firstName = $firstName;
 		}
 
-		protected function setLastName($lastName)
+		public function setLastName($lastName)
 		{
 			$this->lastName = $lastName;
 		}
 
-		protected function setContactTypeId($contactTypeId)
+		public function setContactTypeId($contactTypeId)
 		{
 			$this->contactTypeId = $contactTypeId;
 		}
 
-		protected function setRelationId($relationId)
+		public function setRelationId($relationId)
 		{
 			$this->relationId = $relationId;
 		}
 
-		protected function setAuthId($authId)
+		public function setAuthId($authId)
 		{
 			$this->authId = $authId;
 		}
 
-		protected function setContractSignerFlag($contractSignerFlag)
+		public function setContractSignerFlag($contractSignerFlag)
 		{
 			$this->contractSignerFlag = $contractSignerFlag;
 		}
 
-		protected function setHasKeyFlag($hasKeyFlag)
+		public function setHasKeyFlag($hasKeyFlag)
 		{
 			$this->hasKeyFlag = $hasKeyFlag;
 		}
 
-		protected function setPhone1($phone1)
+		public function setPhone1($phone1)
 		{
 			$this->phone1 = $phone1;
 		}
 
-		protected function setPhoneTypeId1($phoneTypeId1)
+		public function setPhoneTypeId1($phoneTypeId1)
 		{
 			$this->phoneTypeId1 = $phoneTypeId1;
 		}
 
-		protected function setContlTypeNo($contlTypeNo)
+		public function setContlTypeNo($contlTypeNo)
 		{
 			$this->contlTypeNo = $contlTypeNo;
 		}
 
 		protected function getEntityObj()
 		{
-			// TODO: Implement getEntityObj() method.
+			$entityObj = new stdClass();
+
+			$entityObj->first_name = $this->firstName;
+			$entityObj->last_name = $this->lastName;
+			$entityObj->ctactype_id = $this->contactTypeId;
+			$entityObj->relation_id = $this->relationId;
+			$entityObj->auth_id = $this->authId;
+			$entityObj->contract_signer_flag = $this->contractSignerFlag;
+			$entityObj->has_key_flag = $this->hasKeyFlag;
+			$entityObj->phone1 = $this->phone1;
+			$entityObj->phonetype_id1 = $this->phoneTypeId1;
+			$entityObj->contltype_no = $this->contlTypeNo;
+
+			return $entityObj;
 		}
 	}

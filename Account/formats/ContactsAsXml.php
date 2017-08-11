@@ -2,28 +2,29 @@
 
 	namespace WSI\Account\formats;
 
-	class ContactsAsXml extends AbstractFormats
-	{
-		protected $entityParams = [
-			"first_name" => "getFirstName",
-			"last_name" => "getLastName",
-			"ctactype_id" => "getContactTypeId",
-			"relation_id" => "getRelationId",
-			"auth_id" => "getAuthId",
-			"contract_signer_flag" => "getContractSignerFlag",
-			"has_key_flag" => "getHasKeyFlag",
-			"phone1" => "getPhone1",
-			"phonetype_id1" => "getPhoneTypeId1",
-			"contltype_no" => "getContlTypeNo",
-		];
+	use WSI\Account\interfaces\IFormat;
 
-		public function formatEntity($collectionOfContacts)
+	class ContactsAsXml implements IFormat
+	{
+		public function format(array $data)
 		{
-			foreach($collectionOfContacts as $contact)
+			$contacts = "";
+
+			foreach($data as $obj)
 			{
-				$this->formattedEntity .= "<Contact {$this->autoFillAttributes($contact)}/>";
+				$contact = "<Contact ";
+
+				foreach($obj as $key => $val)
+				{
+					if($val !== null)
+					{
+						$contact .= $key."=\"$val\" ";
+					}
+				}
+
+				$contacts .= $contact."/>";
 			}
 
-			return '<Contacts>'.$this->formattedEntity.'</Contacts>';
+			return '<Contacts> '.$contacts.'</Contacts>';
 		}
 	}

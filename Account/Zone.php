@@ -13,37 +13,37 @@
 		protected $equipLocId = "OTHR";
 		protected $equipTypeId;
 
-		protected function setZoneName($name)
+		public function setZoneName($name)
 		{
 			$this->zoneName = $name;
 		}
 
-		protected function setEventId($eventId)
+		public function setEventId($eventId)
 		{
 			$this->eventId = $eventId;
 		}
 
-		protected function setEquipLocId($equipLocId)
+		public function setEquipLocId($equipLocId)
 		{
 			$this->equipLocId = $equipLocId;
 		}
 
-		protected function setEquipTypeId($equipTypeId)
+		public function setEquipTypeId($equipTypeId)
 		{
 			$this->equipTypeId = $equipTypeId;
 		}
 
-		protected function setZoneId($zoneId)
+		public function setZoneId($zoneId)
 		{
 			$this->zoneId = $zoneId;
 		}
 
-		protected function setZoneStateId($zoneStateId)
+		public function setZoneStateId($zoneStateId)
 		{
 			$this->zoneStateId = $zoneStateId;
 		}
 
-		function getEntityObj()
+		protected function getEntityObj()
 		{
 			$entityObj = new stdClass();
 

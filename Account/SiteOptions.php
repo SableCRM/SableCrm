@@ -2,23 +2,29 @@
 
 	namespace WSI\Account;
 
-	use WSI\Account\interfaces\IFormat;
-	use WSI\Account\interfaces\IFormattable;
-
-	class SiteOptions implements IFormattable
+	class SiteOptions extends AbstractEntity
 	{
-		private $data = [];
-
-		public function __construct($data)
+		protected function create($entities)
 		{
-			foreach($data as $key => $val)
+			$entities = $this->outputCollectionOfObjects($entities);
+
+			foreach($entities as $key => $val)
 			{
-				$this->data[strtoupper($key)] = strtoupper($val);
+				$this->collectionOfEntities[$key] = $val;
 			}
+
+			$this->collectionOfEntities = $this->getEntityObj();
 		}
 
-		public function getFormat(IFormat $siteOptions)
+		protected function getEntityObj()
 		{
-			return $siteOptions->format($this->data);
+			$entityObj = [];
+
+			foreach($this->collectionOfEntities as $entityKey => $entityVal)
+			{
+				$entityObj[$entityKey] = $entityVal;
+			}
+
+			return $entityObj;
 		}
 	}

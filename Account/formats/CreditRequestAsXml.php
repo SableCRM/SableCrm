@@ -10,11 +10,14 @@
 		{
 			$values = "";
 
-			foreach($data as $key => $val)
+			foreach($data as $obj)
 			{
-				if($val !== null)
+				foreach($obj as $key => $val)
 				{
-					$values .= "<$key>$val</$key>";
+					if($val !== null)
+					{
+						$values .= "<$key>$val</$key>";
+					}
 				}
 			}
 

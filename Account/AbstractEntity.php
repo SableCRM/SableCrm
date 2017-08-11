@@ -8,7 +8,7 @@
 
 	abstract class AbstractEntity implements IFormattable
 	{
-		private $collectionOfEntities;
+		protected $collectionOfEntities;
 
 		public function __construct($data = null)
 		{

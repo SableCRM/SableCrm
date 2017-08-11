@@ -2,24 +2,29 @@
 
 	namespace WSI\Account\formats;
 
-	use WSI\Account\Agency;
+	use WSI\Account\interfaces\IFormat;
 
-	class AgenciesAsXml extends AbstractFormats
+	class AgenciesAsXml implements IFormat
 	{
-		public function formatEntity($collectionOfAgencies)
+		public function format(array $data)
 		{
-			foreach($collectionOfAgencies as $agency)
-			{
-				$agency = $this->castToTypeofAgency($agency);
+			$agencies = "";
 
-				$this->formattedEntity .= '<SiteAgencyPermit agencytype_id="'.$agency->getAgencyTypeId().'" phone1="'.$agency->getPhone1().'" agency_no="'.$agency->getAgencyNo().'" />';
+			foreach($data as $obj)
+			{
+				$agency = "<SiteAgencyPermit ";
+
+				foreach($obj as $key => $val)
+				{
+					if($val !== null)
+					{
+						$agency .= $key."=\"$val\" ";
+					}
+				}
+
+				$agencies .= $agency."/>";
 			}
 
-			return '<SiteAgencyPermits>'.$this->formattedEntity.'</SiteAgencyPermits>';
-		}
-
-		private function castToTypeofAgency(Agency $agency)
-		{
-			return $agency;
+			return '<SiteAgencyPermits> '.$agencies.'</SiteAgencyPermits>';
 		}
 	}
