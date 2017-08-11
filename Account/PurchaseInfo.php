@@ -18,13 +18,13 @@
 		{
 			if(!$data) return;
 
-			foreach($this->data = $data as $key => $value)
+			foreach($data as $key => $val)
 			{
 				$functionName = "set".$key;
 
 				if(method_exists($this,$functionName))
 				{
-					$this->{$functionName}($value);
+					$this->{$functionName}($val);
 				}
 			}
 		}

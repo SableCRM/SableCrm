@@ -2,16 +2,19 @@
 
 	namespace WSI\Account;
 
+	use Exception;
 	use WSI\Account\interfaces\IFormat;
+	use WSI\Account\interfaces\IFormattable;
 
-	abstract class AbstractEntity
+	abstract class AbstractEntity implements IFormattable
 	{
-		public function __set($name, $value)
+		private $collectionOfEntities;
+
+		public function __construct($data = null)
 		{
-			if(!property_exists($this, $name))
-			{
-				return;
-			}
+			if(!$data) return;
+
+			$this->create($data);
 		}
 
 		protected function outputCollectionOfObjects($collectionOfEntities)
@@ -32,35 +35,38 @@
 
 			if(!$collectionOfEntitiesObject = json_decode($entities))
 			{
-				throw new \Exception("Unable to parse the supplied collection of entities.");
+				throw new Exception("Unable to parse the supplied collection of entities.");
 			}
 
 			return $collectionOfEntitiesObject;
 		}
 
-		public function create($entities)
+		protected function create($entities)
 		{
-			$collectionOfEntities = [];
-
 			$entities = $this->outputCollectionOfObjects($entities);
 
 			foreach($entities as $entity)
 			{
-				$entityObj = new $this;
-
 				foreach($entity as $entityKey => $entityValue)
 				{
-					$entityObj->$entityKey = $entityValue;
+					$functionName = "set".$entityKey;
+
+					if(method_exists($this,$functionName))
+					{
+						$this->{$functionName}($entityValue);
+					}
 				}
 
-				$collectionOfEntities[] = $entityObj;
+				$this->collectionOfEntities[] = $this->getEntityObj();
 			}
-
-			return $collectionOfEntities;
 		}
 
-		public function format(IFormat $format)
+		public function getFormat(IFormat $entityFormat)
 		{
-			$format->format();
+			if(count($this->collectionOfEntities) === 0) throw new Exception("Invalid Operation! getFormat() can only be used when passing data through the constructor");
+
+			return $entityFormat->format($this->collectionOfEntities);
 		}
+
+		protected abstract function getEntityObj();
 	}

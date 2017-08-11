@@ -2,24 +2,29 @@
 
 	namespace WSI\Account\formats;
 
-	use WSI\Account\Zone;
+	use WSI\Account\interfaces\IFormat;
 
-	class ZonesAsXml extends AbstractFormats
+	class ZonesAsXml implements IFormat
 	{
-		public function formatEntity($collectionOfZones)
+		public function format(array $data)
 		{
-			foreach($collectionOfZones as $zone)
-			{
-				$zone = $this->castToTypeofZone($zone);
+			$zones = "";
 
-				$this->formattedEntity .= '<Zone zone_id="'.$zone->getZoneId().'" zonestate_id="'.$zone->getZoneStateId().'" event_id="'.$zone->getEventId().'" equiploc_id="'.$zone->getEquipLocId().'" equiptype_id="'.$zone->getEquipTypeId().'" zone_comment="'.$zone->getName().'" />';
+			foreach($data as $obj)
+			{
+				$zone = "<Zone ";
+
+				foreach($obj as $key => $val)
+				{
+					if($val !== null)
+					{
+						$zone .= $key."=\"$val\" ";
+					}
+				}
+
+				$zones .= $zone."/>";
 			}
 
-			return '<Zones>'.$this->formattedEntity.'</Zones>';
-		}
-
-		private function castToTypeofZone(Zone $zone)
-		{
-			return $zone;
+			return '<Zones> '.$zones.'</Zones>';
 		}
 	}
